@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <meta charset="utf-8">
+      <title></title>
+   </head>
+   <body>
+     <form action="/" method="POST">
+       <input type="text" name = "postcode" placeholder="Postcode">
+       <input type="text" name = "radius" placeholder="Radius">
+       <button type="submit">Search stores</button>
+     </form>
+     <table class="table table-bordered table-condensed" id="SuperStoreData">
+         <tr>
+            <th>County</th>
+            <th>Postcode</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+         </tr>
+         {% for Postcode, LongLat in LocationData.items() %}
+         <tr>
+           <td>{{ LongLat[0] }}</td>
+           <td>{{ Postcode }}</td>
+           <td>{{ LongLat[1] }}</td>
+           <td>{{ LongLat[2] }}</td>
+         </tr>
+        {% endfor %}
+      </table>
+      </div>
+   </body>
+   <style media="screen">
+
+   #SuperStoreData {
+     height: 500px;
+     width: 700px;
+     margin: 10px auto;
+     padding: 0;
+     width: 100%;
+     height: auto;
+     border-collapse: collapse;
+     text-align: center;
+   }
+
+   </style>
+</html>
