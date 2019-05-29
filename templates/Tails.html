@@ -6,12 +6,12 @@
       <title></title>
    </head>
    <body>
-     <form action="/" method="POST">
+     <form id="storeform" action="/" method="POST">
        <input type="text" name = "postcode" placeholder="Postcode">
        <input type="text" name = "radius" placeholder="Radius">
        <button type="submit">Search stores</button>
      </form>
-     <table class="table table-bordered table-condensed" id="SuperStoreData">
+     <table class="table table-bordered table-condensed" id="StoreData">
          <tr>
             <th>County</th>
             <th>Postcode</th>
@@ -31,7 +31,13 @@
    </body>
    <style media="screen">
 
-   #SuperStoreData {
+   #storeform {
+     margin-left: 650px;
+     margin-top: 50px;
+     margin-bottom: 50px;
+   }
+
+   #StoreData {
      margin: 10px auto;
      padding: 10;
      width: 100%;

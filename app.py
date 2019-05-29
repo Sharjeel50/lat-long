@@ -1,8 +1,11 @@
 import json
-from flask import Flask, request, render_template
+import collections
 import urllib.request
+from operator import itemgetter
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
+app.debug = True
 
 """
 Create a new Python-based application (any framework is fine, we prefer Flask)
@@ -12,29 +15,34 @@ Build the functionality that allows you to return a list of stores in any given 
 in the UK ordered from north to south and unit test it - no need to render anything
 """
 
-""" Render the list of stores from the stores.json file in alphabetical order through a backend template """
-def _sortedstores():
+def _readjsonfile():
 
+    # Open stores.json
     with open('./resources/stores.json') as f:
         stores = json.load(f)
 
-    sorted_obj = dict(stores)
-    sorted_obj = sorted(stores, key=lambda x : x['name'])
-    return sorted_obj
+    # # Sort by name and return
+    # sorted_obj = dict(stores)
+    # sorted_obj = sorted(stores, key=lambda x : x['name'])
 
+    return stores
 
+""" Render the list of stores from the stores.json file in alphabetical order through a backend template """
 """ Use postcodes.io to get the latitude and longitude for each postcode and render them next to each
     store location in the template """
 def _longitudelatitude():
 
     returnDict = {}
 
-    values = {'postcodes': [i['postcode'] for i in _sortedstores()] }
+    # Make dictionary with all postcodes to use "Bulk Postcode Lookup"
+    values = {'postcodes': [i['postcode'] for i in _readjsonfile()] }
 
+    # Bulk Postcode Lookup api end point
     api_endpoint = 'https://api.postcodes.io/postcodes/'
 
     data = json.dumps(values).encode('utf8')
 
+    # Use correct request and headers for post method
     req = urllib.request.Request(api_endpoint, data,
             headers={'content-type': 'application/json'})
 
@@ -42,6 +50,7 @@ def _longitudelatitude():
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read())
 
+        # Look through response and add relevant data to dictionary if it is not null
         for i in range(len(result['result'])):
             if result['result'][i]['result'] != None:
                 County = result['result'][i]['result']['admin_district']
@@ -54,7 +63,8 @@ def _longitudelatitude():
     except Exception as e:
         print(e)
 
-    return returnDict
+    # Render list of stores in alphabetical order
+    return {k: returnDict[k] for k in sorted(returnDict, key = returnDict.get)}
 
 
 """ Build the functionality that allows you to return a list of stores in any given radius of any given postcode
@@ -64,20 +74,29 @@ def _searchfunctionality(radius, postcode):
     returnDict = {}
 
     try:
-        url = 'https://api.postcodes.io/postcodes/{}/nearest?radius={}'.format(postcode, radius)
+        # Retrieve Longitude and Latitude from postcode
+        individual_url = 'https://api.postcodes.io/postcodes/{}'.format(postcode)
+        individual_url_data = urllib.request.urlopen(individual_url)
+        _longlat = json.loads(individual_url_data.read())
+
+        # Pass Long and Lat into this end points to get all admin_district's
+        url = 'https://api.postcodes.io/outcodes?lon={}&lat={}?radius={}?limit=99'.format(_longlat['result']['longitude'],
+                                                                                            _longlat['result']['latitude'], radius)
         data = urllib.request.urlopen(url)
         content = json.loads(data.read())
 
+        # Check if Stores are within the list of admin_district's
+        # if they admin_district's match then the store is within the given radius so it is added to the dictionary
         for i in range(len(content['result'])):
             if content['result'][i] != None:
                 for postcode, longlat in _longitudelatitude().items():
-                    if postcode == content['result'][i]['postcode']:
-                        print(postcode)
+                    if longlat[0] in content['result'][i]['admin_district']:
                         County = longlat[0]
                         Postcode = postcode
                         Longitude = longlat[1]
                         Latitude = longlat[2]
 
+                        # Add to dictonary and return
                         returnDict[Postcode] = [County, Longitude, Latitude]
     except Exception as e:
         print(e)
@@ -87,9 +106,13 @@ def _searchfunctionality(radius, postcode):
 
 @app.route('/', methods=['POST', 'GET'])
 def main():
+
+    # Check if User has made submitted a form with postcode and radius,
+    # Retrieve given radius and postcode and return a template with the data return from _searchfunctionality
     if request.method == 'POST':
         _radius = request.form['radius']
         _postcode = request.form['postcode']
         return render_template("Tails.html", LocationData = _searchfunctionality(_radius, _postcode))
     else:
+        # Normal template with all stores listed alphabetically
         return render_template('Tails.html', LocationData = _longitudelatitude())
