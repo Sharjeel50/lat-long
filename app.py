@@ -17,13 +17,9 @@ in the UK ordered from north to south and unit test it - no need to render anyth
 
 def _readjsonfile():
 
-    # Open stores.json
+    # Open stores.json and return json obj
     with open('./resources/stores.json') as f:
         stores = json.load(f)
-
-    # # Sort by name and return
-    # sorted_obj = dict(stores)
-    # sorted_obj = sorted(stores, key=lambda x : x['name'])
 
     return stores
 
@@ -81,7 +77,7 @@ def _searchfunctionality(radius, postcode):
 
         # Pass Long and Lat into this end points to get all admin_district's
         url = 'https://api.postcodes.io/outcodes?lon={}&lat={}?radius={}?limit=99'.format(_longlat['result']['longitude'],
-                                                                                            _longlat['result']['latitude'], radius)
+                                                                                          _longlat['result']['latitude'], radius)
         data = urllib.request.urlopen(url)
         content = json.loads(data.read())
 
@@ -101,6 +97,7 @@ def _searchfunctionality(radius, postcode):
     except Exception as e:
         print(e)
 
+    print(returnDict)    
     return returnDict
 
 
