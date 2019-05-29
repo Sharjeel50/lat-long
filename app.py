@@ -10,13 +10,12 @@ app.debug = True
 """
 Create a new Python-based application (any framework is fine, we prefer Flask)
 Render the list of stores from the stores.json file in alphabetical order through a backend template
-Use postcodes.io to get the latitude and longitude for each postcode and render them next to each store location in the template
+Use postcodes.io to get the latitude and longitude for each postcode and render them next to each store-location in the template
 Build the functionality that allows you to return a list of stores in any given radius of any given postcode
 in the UK ordered from north to south and unit test it - no need to render anything
 """
 
-def _readjsonfile():
-
+def read_jsonfile():
     # Open stores.json and return json obj
     with open('./resources/stores.json') as f:
         stores = json.load(f)
@@ -26,12 +25,12 @@ def _readjsonfile():
 """ Render the list of stores from the stores.json file in alphabetical order through a backend template """
 """ Use postcodes.io to get the latitude and longitude for each postcode and render them next to each
     store location in the template """
-def _longitudelatitude():
+def render_alphabetically_longitude_latitude():
 
     returnDict = {}
 
     # Make dictionary with all postcodes to use "Bulk Postcode Lookup"
-    values = {'postcodes': [i['postcode'] for i in _readjsonfile()] }
+    values = {'postcodes': [i['postcode'] for i in read_jsonfile()]}
 
     # Bulk Postcode Lookup api end point
     api_endpoint = 'https://api.postcodes.io/postcodes/'
@@ -65,7 +64,7 @@ def _longitudelatitude():
 
 """ Build the functionality that allows you to return a list of stores in any given radius of any given postcode
     in the UK ordered from north to south and unit test it - no need to render anything """
-def _searchfunctionality(radius, postcode):
+def search_postcode_radius(radius, postcode):
 
     returnDict = {}
 
@@ -97,19 +96,19 @@ def _searchfunctionality(radius, postcode):
     except Exception as e:
         print(e)
 
-    print(returnDict)    
-    return returnDict
+    # North to south
+    return {k: returnDict[k] for k in sorted(returnDict)}
 
 
 @app.route('/', methods=['POST', 'GET'])
-def main():
+def Tails():
 
     # Check if User has made submitted a form with postcode and radius,
     # Retrieve given radius and postcode and return a template with the data return from _searchfunctionality
     if request.method == 'POST':
         _radius = request.form['radius']
         _postcode = request.form['postcode']
-        return render_template("Tails.html", LocationData = _searchfunctionality(_radius, _postcode))
+        return render_template("Tails.html", LocationData = search_postcode_radius(_radius, _postcode))
     else:
         # Normal template with all stores listed alphabetically
-        return render_template('Tails.html', LocationData = _longitudelatitude())
+        return render_template('Tails.html', LocationData = render_alphabetically_longitude_latitude())
