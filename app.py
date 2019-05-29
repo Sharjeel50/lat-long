@@ -62,12 +62,23 @@ def _longitudelatitude():
 def _searchfunctionality(radius, postcode):
 
     returnDict = {}
-    
+
     try:
-        url = 'https://api.postcodes.io/postcodes/{}'.format(postcode)
+        url = 'https://api.postcodes.io/postcodes/{}/nearest?radius={}'.format(postcode, radius)
         data = urllib.request.urlopen(url)
         content = json.loads(data.read())
-        returnDict[content['result']['postcode']] = [content['result']['admin_district'], content['result']['longitude'], content['result']['latitude']]
+
+        for i in range(len(content['result'])):
+            if content['result'][i] != None:
+                for postcode, longlat in _longitudelatitude().items():
+                    if postcode == content['result'][i]['postcode']:
+                        print(postcode)
+                        County = longlat[0]
+                        Postcode = postcode
+                        Longitude = longlat[1]
+                        Latitude = longlat[2]
+
+                        returnDict[Postcode] = [County, Longitude, Latitude]
     except Exception as e:
         print(e)
 
@@ -77,10 +88,8 @@ def _searchfunctionality(radius, postcode):
 @app.route('/', methods=['POST', 'GET'])
 def main():
     if request.method == 'POST':
-        print("post working")
         _radius = request.form['radius']
         _postcode = request.form['postcode']
         return render_template("Tails.html", LocationData = _searchfunctionality(_radius, _postcode))
     else:
-        print("default working")
         return render_template('Tails.html', LocationData = _longitudelatitude())
