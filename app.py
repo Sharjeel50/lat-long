@@ -1,9 +1,8 @@
+import os
 import sys
 import json
 import glob
-import collections
 import urllib.request
-from operator import itemgetter
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
@@ -19,13 +18,23 @@ in the UK ordered from north to south and unit test it - no need to render anyth
 
 def read_jsonfile():
 
+    # try:
+    #     path = os.path.join(os.getcwd(), 'resources') + "\stores.json"
+    #     print(os.getcwd())
+    #     print(path)
+    # except BaseException:
+    #     path = os.path.join(os.getcwd(), 'Sharjeel_Jan_Tails_TechnicalTest')
+
+
     # Use of dynamic pathing for Unit Tests to find stores.json
     try:
-        dynamicfilepath = glob.glob('../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
-    except Exception as e:
-        dynamicfilepath = glob.glob('../../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+        dynamicfilepath = glob.glob(
+            '../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+    except BaseException:
+        dynamicfilepath = glob.glob(
+            '../../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
 
-    with open(dynamicfilepath) as f:
+    with open(path) as f:
         stores = json.load(f)
 
     return stores

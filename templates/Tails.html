@@ -12,7 +12,7 @@
          <button type="submit">Search Stores</button>
       </form>
       <div class="table-responsive">
-           <table class="table table-bordered table-condensed" style="height:10px;"  id="StoreData">
+         <table class="table table-bordered table-condensed" style="height:10px;"  id="StoreData">
             <thead>
                <tr>
                   <th>County / Admin district</th>
@@ -43,6 +43,13 @@
       overflow-y: auto;
       display: inline-block;
       margin-left: 300px;
+      }
+      thead th {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
       }
       table {
       height: 100%;

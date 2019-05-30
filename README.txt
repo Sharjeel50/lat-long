@@ -1,14 +1,17 @@
-I made this technical test really easy to run and test;
+------------------------------------------------------- Tails Technical Test ---------------------------------------------------------------------------------------------
 
-Firstly navigate to "Tails" folder via command prompt and run the application by entering "flask run", this will run the project which will
-show a localhost end point which you can copy and paste to your browser.
+## Navigation and Usage
 
-With the end point copied into the URL section of the browser you should see a table and a form pop up which is where the main application lies,
-the table will already be filled with all stores alphabetically stored.
+1. Place the downloaded Folder in the Desktop and Navigate to "Tails" (/Sharjeel_Jan_Tails_TechnicalTest/Tails) folder via command prompt and run the application by entering "flask run",
+   this will run the project which will show a localhost URL which you can copy and paste to your browser.
 
-You can then test the search functionality by entering a Postcode and Radius which would update then table of contents.
+2. Paste the localhost endpoint into URL section of any browser, this will navigate to the main application where you will see a form
+   and an already populated table with alphabetically listed stores
 
-To run the Unit test's open Unit_Test.py by navigating to "test" folder and run the file via python compiler, this will promptly start the written test cases.
+3. Use the input boxes "Postcode" and "Radius" to search for any stores nearby.
+
+4. To run the Unit test's open Unit_Test.py by navigating to "test" folder and run the file via python compiler, this will promptly start
+   the written test cases.
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -22,14 +25,17 @@ Tell us what you'd have changed if you'd have had more time?
 
 I would split the files up to make it more clear for other developers and so it is less cluttered, I would also find another way to sort my dictionary as the current way is confusing.
 I would also try to lower the time complexity of this application to get it as fast as possible.
-I would additionally find a way to make sure I don't call the API so much which further makes the application slower.
 
 
 What bits did you find the toughest? What bit are you most proud of? In both cases, why?
 
-I think the part I found the toughest was making sure I had the all the stores within the given radius and postcode, I am also proud of this part of the test for the same reason it being difficult.
+I think the part I found the toughest was making sure I had the all the stores within the given radius and postcode, I found this part of the test tough as I had to use an alternate method
+to get postcodes within a larger radius size. I am similarly proud of the same section of the test as I was able to come up with a simple solution.
+
 
 
 What's one thing we could do to improve this test?
 
 I think the test overall was very well and planned out though if I were to change it personally I would elaborate on ordering the searched stores from north to south.
+
+C:\Users\Sharjeel Jan\Desktop\Sharjeel_Jan_Tails_TechnicalTest\Tails\test\resources\stores.json
