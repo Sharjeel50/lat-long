@@ -1,6 +1,6 @@
 I made this technical test really easy to run and test;
 
-Firstly navigate to this main folder via command prompt and run the application by entering "flask run", this will run the project which will
+Firstly navigate to "Tails" folder via command prompt and run the application by entering "flask run", this will run the project which will
 show a localhost end point which you can copy and paste to your browser.
 
 With the end point copied into the URL section of the browser you should see a table and a form pop up which is where the main application lies,
@@ -8,7 +8,7 @@ the table will already be filled with all stores alphabetically stored.
 
 You can then test the search functionality by entering a Postcode and Radius which would update then table of contents.
 
-To run the Unit test's open Unit_Test.py and run the file via python compiler, this will promptly start the written test cases.
+To run the Unit test's open Unit_Test.py by navigating to "test" folder and run the file via python compiler, this will promptly start the written test cases.
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------

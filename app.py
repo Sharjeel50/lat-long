@@ -19,7 +19,12 @@ in the UK ordered from north to south and unit test it - no need to render anyth
 
 def read_jsonfile():
 
-    dynamicfilepath = glob.glob('../../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+    # Use of dynamic pathing for Unit Tests to find stores.json
+    try:
+        dynamicfilepath = glob.glob('../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+    except Exception as e:
+        dynamicfilepath = glob.glob('../../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+
     with open(dynamicfilepath) as f:
         stores = json.load(f)
 
