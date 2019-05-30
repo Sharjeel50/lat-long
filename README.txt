@@ -2,7 +2,7 @@
 
 ## Navigation and Usage
 
-1. Place the downloaded Folder in the Desktop and Navigate to "Tails" (/Sharjeel_Jan_Tails_TechnicalTest/Tails) folder via command prompt and run the application by entering "flask run",
+1. Navigate to "Tails" (/Sharjeel_Jan_Tails_TechnicalTest/Tails) folder via command prompt and run the application by entering "flask run",
    this will run the project which will show a localhost URL which you can copy and paste to your browser.
 
 2. Paste the localhost endpoint into URL section of any browser, this will navigate to the main application where you will see a form
@@ -24,7 +24,7 @@ Backend
 Tell us what you'd have changed if you'd have had more time?
 
 I would split the files up to make it more clear for other developers and so it is less cluttered, I would also find another way to sort my dictionary as the current way is confusing.
-I would also try to lower the time complexity of this application to get it as fast as possible.
+I would additionally try to lower the time complexity of this application to get it as fast as possible.
 
 
 What bits did you find the toughest? What bit are you most proud of? In both cases, why?
@@ -37,5 +37,3 @@ to get postcodes within a larger radius size. I am similarly proud of the same s
 What's one thing we could do to improve this test?
 
 I think the test overall was very well and planned out though if I were to change it personally I would elaborate on ordering the searched stores from north to south.
-
-C:\Users\Sharjeel Jan\Desktop\Sharjeel_Jan_Tails_TechnicalTest\Tails\test\resources\stores.json

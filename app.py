@@ -20,9 +20,11 @@ def read_jsonfile():
 
     # Use of dynamic pathing for Unit Tests to find stores.json
     try:
-        dynamicfilepath = glob.glob(str(os.getcwd()) + "\\resources\\stores.json")[0]
+        dynamicfilepath = glob.glob(
+            str(os.getcwd()) + "\\resources\\stores.json")[0]
     except BaseException:
-        dynamicfilepath = glob.glob(str(os.getcwd()[:-4]) + "resources\stores.json")[0]
+        dynamicfilepath = glob.glob(
+            str(os.getcwd()[:-4]) + r"resources\stores.json")[0]
 
     with open(dynamicfilepath) as f:
         stores = json.load(f)
