@@ -18,23 +18,22 @@ in the UK ordered from north to south and unit test it - no need to render anyth
 
 def read_jsonfile():
 
-    # try:
-    #     path = os.path.join(os.getcwd(), 'resources') + "\stores.json"
-    #     print(os.getcwd())
-    #     print(path)
-    # except BaseException:
-    #     path = os.path.join(os.getcwd(), 'Sharjeel_Jan_Tails_TechnicalTest')
-
+    aa = glob.glob(str(os.getcwd()) + "\resources\stores.json")
+    print(os.getcwd() + "\resources\stores.json")
 
     # Use of dynamic pathing for Unit Tests to find stores.json
     try:
         dynamicfilepath = glob.glob(
             '../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
-    except BaseException:
-        dynamicfilepath = glob.glob(
-            '../../../Sharjeel_Jan_Tails_TechnicalTest/Tails/resources/stores.json')[0]
+        # dynamicfilepath = glob.glob(str(os.getcwd()) + "resources\stores.json")
+        # dynamicfilepath = ''.join(dynamicfilepath)
+        # print(dynamicfilepath)
 
-    with open(path) as f:
+    except BaseException:
+        dynamicfilepath = glob.glob(str(os.getcwd()[:-4]) + "resources\stores.json")
+        dynamicfilepath = ''.join(dynamicfilepath)
+
+    with open(dynamicfilepath) as f:
         stores = json.load(f)
 
     return stores
