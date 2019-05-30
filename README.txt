@@ -8,7 +8,7 @@ the table will already be filled with all stores alphabetically stored.
 
 You can then test the search functionality by entering a Postcode and Radius which would update then table of contents.
 
-To run the Unit test's open Unit_Test.py and run the file via python compiler, this will promptly start the individual unit test's and return if the test's have passed or not.
+To run the Unit test's open Unit_Test.py and run the file via python compiler, this will promptly start the written test cases.
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,9 @@ Backend
 
 Tell us what you'd have changed if you'd have had more time?
 
-I would split the files up to make it more clear for other developers, I would also find another way to sort my dictionary as the current way is confusing.
+I would split the files up to make it more clear for other developers and so it is less cluttered, I would also find another way to sort my dictionary as the current way is confusing.
+I would also try to lower the time complexity of this application to get it as fast as possible.
+I would additionally find a way to make sure I don't call the API so much which further makes the application slower.
 
 
 What bits did you find the toughest? What bit are you most proud of? In both cases, why?

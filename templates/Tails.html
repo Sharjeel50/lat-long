@@ -6,44 +6,56 @@
       <title></title>
    </head>
    <body>
-     <form id="storeform" action="/" method="POST">
-       <input type="text" name = "postcode" placeholder="Postcode">
-       <input type="text" name = "radius" placeholder="Radius">
-       <button type="submit">Search Stores</button>
-     </form>
-     <table class="table table-bordered table-condensed" id="StoreData">
-         <tr>
-            <th>County / Admin district</th>
-            <th>Postcode</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
-         </tr>
-         {% for Postcode, LongLat in LocationData.items() %}
-         <tr>
-           <td>{{ LongLat[0] }}</td>
-           <td>{{ Postcode }}</td>
-           <td>{{ LongLat[1] }}</td>
-           <td>{{ LongLat[2] }}</td>
-         </tr>
-        {% endfor %}
-      </table>
+      <form id="storeform" action="/" method="POST">
+         <input type="text" name = "postcode" placeholder="Postcode">
+         <input type="text" name = "radius" placeholder="Radius">
+         <button type="submit">Search Stores</button>
+      </form>
+      <div class="table-responsive">
+           <table class="table table-bordered table-condensed" style="height:10px;"  id="StoreData">
+            <thead>
+               <tr>
+                  <th>County / Admin district</th>
+                  <th>Postcode</th>
+                  <th>Longitude</th>
+                  <th>Latitude</th>
+               </tr>
+            </thead>
+            {% for Postcode, LongLat in LocationData.items() %}
+            <tr>
+               <td>{{ LongLat[0] }}</td>
+               <td>{{ Postcode }}</td>
+               <td>{{ LongLat[1] }}</td>
+               <td>{{ LongLat[2] }}</td>
+            </tr>
+            {% endfor %}
+         </table>
       </div>
    </body>
+   </div>
    <style media="screen">
-
-   #storeform {
-     margin-left: 700px;
-     margin-top: 50px;
-     margin-bottom: 50px;
-   }
-
-   #StoreData {
-     margin: 10px auto;
-     padding: 10;
-     width: 100%;
-     height: auto;
-     border-collapse: collapse;
-   }
-
+      html, body {
+      height: 100%;
+      }
+      div.table-responsive {
+      height: 50%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: inline-block;
+      margin-left: 300px;
+      }
+      table {
+      height: 100%;
+      }
+      #storeform {
+      margin-left: 700px;
+      margin-top: 50px;
+      margin-bottom: 50px
+      }
+      #StoreData {
+      margin: 10px auto;
+      padding: 10;
+      width: 1250px;
+      }
    </style>
 </html>
