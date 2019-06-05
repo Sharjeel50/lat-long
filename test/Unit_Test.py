@@ -4,7 +4,6 @@ import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import app
 
-
 class FlaskTestCase(unittest.TestCase):
 
     def test_UB5_6JE(self):
