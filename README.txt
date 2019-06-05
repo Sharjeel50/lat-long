@@ -1,5 +1,3 @@
-------------------------------------------------------- Tails Technical Test ---------------------------------------------------------------------------------------------
-
 ## Navigation and Usage
 
 1. Navigate to "Tails" older via command prompt and run the application by entering "flask run",
